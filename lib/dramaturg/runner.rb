@@ -4,5 +4,6 @@ module Dramaturg
 
     autoload :Print
     autoload :Shell
+    autoload :Thor
   end
 end
