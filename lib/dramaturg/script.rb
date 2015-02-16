@@ -1,33 +1,33 @@
 require 'term/ansicolor'
 
+COLORS = Term::ANSIColor
 
 module Dramaturg
   class Script
-    include Term::ANSIColor
+
+    DEFAULT_CONFIG = {
+      prompter: {
+        class: Prompter::MadCLIbs,
+        prompt: ->(p) {
+          if p.script.runner.last_success?
+            COLORS.bold(COLORS.green("$"))
+          else
+            COLORS.bold(COLORS.red("$"))
+          end
+        },
+        format: {
+          Value::Default => ->(s){ COLORS.bold(COLORS.cyan(s)) },
+          Value::Fixed => -> (s) { s },
+        },
+        ctrlc: CtrlCHandler::SkipOrExit
+      },
+      runner: {
+        class: Runner::Shell
+      }
+    }
 
     def initialize(config = {})
-      defaults = {
-        prompter: {
-          class: Prompter::MadCLIbs,
-          prompt: ->() {
-            if self.runner.last_success?
-              bold(green("$"))
-            else
-              bold(red("$"))
-            end
-          },
-          format: {
-            Value::Default => ->(s){ bold(cyan(s)) },
-            Value::Fixed => -> (s) { s }
-          },
-          ctrlc: CtrlCHandler::SkipOrExit
-        },
-        runner: {
-          class: Runner::Shell
-        },
-      }
-
-      @config = defaults.deep_merge(config)
+      @config = DEFAULT_CONFIG.deep_merge(config)
 
       @commands = []
     end

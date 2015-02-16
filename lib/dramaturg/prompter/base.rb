@@ -2,6 +2,7 @@ module Dramaturg
   module Prompter
     class Base
       attr_reader :current_command
+      attr_reader :script
 
       def initialize(script,config)
         @script = script
@@ -13,7 +14,7 @@ module Dramaturg
 
       def prompt
         if @prompt.respond_to? :call
-          @prompt.()
+          @prompt.(self)
         else
           @prompt
         end
