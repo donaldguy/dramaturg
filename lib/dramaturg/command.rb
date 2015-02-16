@@ -27,6 +27,7 @@ module Dramaturg
 
     def run
       @script.execute(self)
+      self
     end
 
     def default(v)
