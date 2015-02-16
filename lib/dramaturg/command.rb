@@ -15,6 +15,7 @@ module Dramaturg
     opt :allow_suffix, ->(cmd){!!(cmd.to_s =~ /\s+$/)}
     opt :capture_output, false
     opt :fail_ok, false
+    opt :save_to_file, false
 
     attr_accessor :ran
     alias ran? ran

@@ -4,5 +4,6 @@ module Dramaturg
 
     autoload :Fixed
     autoload :Default
+    autoload :Silent
   end
 end

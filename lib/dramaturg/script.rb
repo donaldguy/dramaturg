@@ -18,6 +18,7 @@ module Dramaturg
         format: {
           Value::Default => ->(s){ COLORS.bold(COLORS.cyan(s)) },
           Value::Fixed => -> (s) { s },
+          Value::Silent => -> (s) { "" }
         },
         ctrlc: CtrlCHandler::SkipOrExit
       },

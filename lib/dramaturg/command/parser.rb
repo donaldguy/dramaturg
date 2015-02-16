@@ -23,6 +23,10 @@ module Dramaturg
           self[:__suffix] = Value::Default.new("")
           self << :__suffix
         end
+
+        if self.save_to_file
+          self << Value::Silent.new(" | tee #{self.save_to_file}")
+        end
       end
 
       private

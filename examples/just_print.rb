@@ -10,7 +10,7 @@ $i = Dramaturg::Script.new({
 })
 at_exit { $i.run_all() }
 
-git = cmd("git checkout -b {branch:master}")
+git = $i.cmd("git checkout -b {branch:master}")
   .name('new branch')
   .fail_ok(true)
 
