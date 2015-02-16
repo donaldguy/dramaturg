@@ -1,4 +1,6 @@
-# Dramaturg: Optionally-interactive shell scripts
+# Dramaturg: <br>Optionally-interactive shell scripts
+[![Gem Version](https://badge.fury.io/rb/dramaturg.svg)](http://badge.fury.io/rb/dramaturg) [![Code Climate](https://codeclimate.com/github/donaldguy/dramaturg/badges/gpa.svg)](https://codeclimate.com/github/donaldguy/dramaturg) [![Dependency Status](https://gemnasium.com/donaldguy/dramaturg.svg)](https://gemnasium.com/donaldguy/dramaturg)
+
 
 In theater, a dramaturg (or "literary manager") is a behind-the-scenes individual who researches and advises in the development of dramatic scripts and productions.
 
