@@ -7,10 +7,14 @@ module Dramaturg
       def initialize(script,config)
         super
         @cli = ::MadCLIbs.new
+        @cli.interrupt_handler = ->() { config[:ctrlc].(self, self.current_command) }
       end
 
       def call(cmd)
+        @current_command = cmd
         @cli.prompt(prompt, *values_to_madclib_tokens(cmd))
+
+        return if @abort
 
         @values.each do |key, entered|
           cmd[key] = entered.value

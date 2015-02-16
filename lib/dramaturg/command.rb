@@ -9,6 +9,7 @@ module Dramaturg
     include Command::Opt
 
     opt :program_name, ->(cmd){cmd.to_s[/^\S+/]}
+    opt :aborted, false
 
     opt :allow_suffix, ->(cmd){!!(cmd.to_s =~ /\s+$/)}
     opt :capture_output, false

@@ -1,11 +1,11 @@
+require_relative 'base'
+
 module Dramaturg
-  class Runner::Print
+  class Runner::Print < Runner::Base
     def initialize(script,config={})
     end
 
-    def call(cmd)
-      line = cmd.map { |v| cmd.get(v) }.join(' ')
-
+    def _call(line,cmd)
       print "Would run: #{line}"
       cmd.ran = line
 

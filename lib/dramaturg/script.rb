@@ -13,11 +13,16 @@ module Dramaturg
           format: {
             Value::Default => ->(s){ bold(cyan(s)) },
             Value::Fixed => -> (s) { s }
+          },
+          ctrlc: ->(prompter, cmd) {
+            puts "\nCtrl-C during #{cmd.program_name} prompt"
+            require 'pry'; binding.pry
+            prompter.abort!
           }
         },
         runner: {
           class: Runner::Shell
-        }
+        },
       })
 
       @commands = []

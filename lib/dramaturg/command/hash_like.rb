@@ -7,7 +7,12 @@ module Dramaturg
       #for internal/pre- or mid-run use, use #get
       def [](k)
         self.run if !ran?
-        get(k)
+
+        if ran? == :aborted
+          "???" #all bets off
+        else
+          get(k)
+        end
       end
 
       def get(k)
