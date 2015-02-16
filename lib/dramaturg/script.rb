@@ -6,7 +6,7 @@ module Dramaturg
     include Term::ANSIColor
 
     def initialize(config = {})
-      @config = config.reverse_merge({
+      defaults = {
         prompter: {
           class: Prompter::MadCLIbs,
           prompt: ->() {
@@ -25,12 +25,15 @@ module Dramaturg
         runner: {
           class: Runner::Shell
         },
-      })
+      }
+
+      @config = defaults.deep_merge(config)
 
       @commands = []
     end
 
     def cmd(command_str, &opts)
+      run_all if @config[:run_previous_on_declare]
       c = Command.new(command_str, self)
       @commands << c
 

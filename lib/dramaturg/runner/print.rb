@@ -11,6 +11,7 @@ module Dramaturg
       cmd.ran = line
 
       puts ""
+      return true
     end
   end
 end

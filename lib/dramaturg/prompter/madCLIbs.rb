@@ -10,7 +10,7 @@ module Dramaturg
         @cli.interrupt_handler = ->() { config[:ctrlc].(self, self.current_command) }
       end
 
-      def call(cmd)
+      def _call(cmd)
         @current_command = cmd
         @cli.prompt(prompt, *values_to_madclib_tokens(cmd))
 

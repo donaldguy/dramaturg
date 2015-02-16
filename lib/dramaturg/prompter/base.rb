@@ -19,6 +19,11 @@ module Dramaturg
         end
       end
 
+      def call(cmd)
+        @current_command = cmd
+        _call(cmd)
+      end
+
       def abort!
         @abort = true
         self.current_command.aborted(true)

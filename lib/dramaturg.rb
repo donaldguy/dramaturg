@@ -1,6 +1,6 @@
 require 'dramaturg/version'
 require 'active_support/dependencies/autoload'
-require 'active_support/core_ext/hash/reverse_merge'
+require 'active_support/core_ext/hash/deep_merge'
 
 module Dramaturg
   extend ActiveSupport::Autoload

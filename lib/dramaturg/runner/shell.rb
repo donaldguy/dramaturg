@@ -4,7 +4,6 @@ module Dramaturg
   class Runner::Shell < Runner::Base
     def initialize(script, config={})
       super
-      @script = script
     end
 
     def _call(line,cmd)
