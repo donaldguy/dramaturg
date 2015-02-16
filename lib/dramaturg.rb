@@ -9,4 +9,5 @@ module Dramaturg
     autoload :Value
     autoload :Prompter
     autoload :Runner
+    autoload :CtrlCHandler
 end

@@ -8,6 +8,7 @@ module Dramaturg
     include Command::Parser
     include Command::Opt
 
+    opt :name, ->(cmd) { cmd.program_name }
     opt :program_name, ->(cmd){cmd.to_s[/^\S+/]}
     opt :aborted, false
 

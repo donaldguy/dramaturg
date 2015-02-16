@@ -1,6 +1,8 @@
 module Dramaturg
   class Runner::Base
     def initialize(script,config={})
+      @script = script
+      @last_success = true
     end
 
     def call(cmd)
@@ -19,8 +21,13 @@ module Dramaturg
         ok = false
       end
 
-      ok
+      @last_success = ok
     end
+
+    def last_success?
+      @last_success
+    end
+
 
     def handle_fail(cmd)
       raise RuntimeError, "#{cmd.ran} failed"

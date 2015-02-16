@@ -3,6 +3,7 @@ require_relative 'base'
 module Dramaturg
   class Runner::Shell < Runner::Base
     def initialize(script, config={})
+      super
       @script = script
     end
 

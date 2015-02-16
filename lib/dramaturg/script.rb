@@ -9,16 +9,18 @@ module Dramaturg
       @config = config.reverse_merge({
         prompter: {
           class: Prompter::MadCLIbs,
-          prompt: bold(green("$")),
+          prompt: ->() {
+            if self.runner.last_success?
+              bold(green("$"))
+            else
+              bold(red("$"))
+            end
+          },
           format: {
             Value::Default => ->(s){ bold(cyan(s)) },
             Value::Fixed => -> (s) { s }
           },
-          ctrlc: ->(prompter, cmd) {
-            puts "\nCtrl-C during #{cmd.program_name} prompt"
-            require 'pry'; binding.pry
-            prompter.abort!
-          }
+          ctrlc: CtrlCHandler::SkipOrExit
         },
         runner: {
           class: Runner::Shell
