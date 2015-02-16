@@ -27,7 +27,7 @@ module Dramaturg
 
       private
       def tokenize(s)
-        s.split /\s+/
+        s.split /(?=\{)|(?<=\})/
       end
     end
   end

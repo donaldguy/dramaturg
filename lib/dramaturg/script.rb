@@ -10,9 +10,9 @@ module Dramaturg
         class: Prompter::MadCLIbs,
         prompt: ->(p) {
           if p.script.runner.last_success?
-            COLORS.bold(COLORS.green("$"))
+            COLORS.bold(COLORS.green("$ "))
           else
-            COLORS.bold(COLORS.red("$"))
+            COLORS.bold(COLORS.red("$ "))
           end
         },
         format: {

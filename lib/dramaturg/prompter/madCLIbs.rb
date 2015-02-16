@@ -6,7 +6,7 @@ module Dramaturg
     class MadCLIbs < Base
       def initialize(script,config)
         super
-        @cli = ::MadCLIbs.new
+        @cli = ::MadCLIbs.new(separator: '')
         @cli.interrupt_handler = ->() { config[:ctrlc].(self, self.current_command) }
       end
 

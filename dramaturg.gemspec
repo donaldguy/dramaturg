@@ -25,7 +25,7 @@ easily departed from as desired & appropriate for the user's level of familiarit
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "madCLIbs", '~> 0.0.4'
+  spec.add_dependency "madCLIbs", '~> 0.0.5'
   spec.add_dependency "activesupport", '~> 4'
 
 

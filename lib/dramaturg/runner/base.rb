@@ -7,7 +7,7 @@ module Dramaturg
 
     def call(cmd)
       if !cmd.aborted
-        line = cmd.map { |v| cmd.get(v) }.join(' ')
+        line = cmd.map { |v| cmd.get(v) }.join('')
 
         ok = _call(line, cmd)
 
