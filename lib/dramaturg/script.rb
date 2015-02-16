@@ -16,9 +16,10 @@ module Dramaturg
           end
         },
         format: {
-          Value::Default => ->(s){ COLORS.bold(COLORS.cyan(s)) },
-          Value::Fixed => -> (s) { s },
-          Value::Silent => -> (s) { "" }
+          Value::Default => ->(s) { COLORS.bold(COLORS.cyan(s)) },
+          Value::Fixed   => ->(s) { s },
+          Value::Silent  => ->(s) { "" },
+          Value::Masked  => ->(s) { s.name }
         },
         ctrlc: CtrlCHandler::SkipOrExit
       },
@@ -47,18 +48,8 @@ module Dramaturg
     alias call cmd
     alias [] cmd
 
-    def prompter
-      @prompter ||= @config[:prompter][:class].new(
-        self,
-        @config[:prompter]
-      )
-    end
-
-    def runner
-      @runner ||= @config[:runner][:class].new(
-        self,
-        @config[:runner]
-      )
+    def masked_value(str)
+      Value::Masked.new(str)
     end
 
     def execute(cmd)
@@ -73,6 +64,20 @@ module Dramaturg
           execute(cmd)
         end
       end
+    end
+
+    def prompter
+      @prompter ||= @config[:prompter][:class].new(
+        self,
+        @config[:prompter]
+      )
+    end
+
+    def runner
+      @runner ||= @config[:runner][:class].new(
+        self,
+        @config[:runner]
+      )
     end
   end
 end

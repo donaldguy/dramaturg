@@ -27,6 +27,7 @@ module Dramaturg
         {
           Value::Default => ::MadCLIbs::Blanks::String,
           Value::Silent => Value::Silent,
+          Value::Masked => Value::Masked,
           Value::Fixed => Value::Fixed #i.e. ::String
         }
         @type_map[t]
