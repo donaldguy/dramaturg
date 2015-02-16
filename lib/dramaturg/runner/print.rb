@@ -1,14 +1,13 @@
 module Dramaturg
   class Runner::Print
-    def initialize()
+    def initialize(script,config={})
     end
 
     def call(cmd)
-      print "Would run: "
-      cmd.each do |v|
-        print cmd.get(v)
-        print " "
-      end
+      line = cmd.map { |v| cmd.get(v) }.join(' ')
+
+      print "Would run: #{line}"
+      cmd.ran = line
 
       puts ""
     end

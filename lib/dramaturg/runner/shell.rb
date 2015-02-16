@@ -1,6 +1,6 @@
 module Dramaturg
   class Runner::Shell
-    def initialize(script)
+    def initialize(script, config={})
       @script = script
     end
 
@@ -14,11 +14,18 @@ module Dramaturg
         ok = system(line)
       end
 
+      cmd.ran = line
+
       if !ok && !cmd.fail_ok
-        @script.handle_fail(cmd)
+        handle_fail(cmd)
       end
 
       ok
+    end
+
+
+    def handle_fail(cmd)
+      raise RuntimeError, "#{cmd.ran} failed"
     end
   end
 end

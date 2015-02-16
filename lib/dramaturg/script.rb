@@ -1,15 +1,29 @@
+require 'term/ansicolor'
+
+
 module Dramaturg
   class Script
+    include Term::ANSIColor
+
     def initialize(config = {})
       @config = config.reverse_merge({
-        prompter: Prompter.new,
-        runner: Runner::Shell.new(self),
+        prompter: {
+          class: Prompter::MadCLIbs,
+          prompt: bold(green("$")),
+          format: {
+            Value::Default => ->(s){ bold(cyan(s)) },
+            Value::Fixed => -> (s) { s }
+          }
+        },
+        runner: {
+          class: Runner::Shell
+        }
       })
 
       @commands = []
     end
 
-    def call(command_str, &opts)
+    def cmd(command_str, &opts)
       c = Command.new(command_str, self)
       @commands << c
 
@@ -19,22 +33,33 @@ module Dramaturg
 
       c
     end
+    alias call cmd
+    alias [] cmd
 
-    def [](c,&s)
-      self.call(c,&s)
+    def prompter
+      @prompter ||= @config[:prompter][:class].new(
+        self,
+        @config[:prompter]
+      )
     end
 
-    def run(cmd)
+    def runner
+      @runner ||= @config[:runner][:class].new(
+        self,
+        @config[:runner]
+      )
+    end
+
+    def execute(cmd)
       cmd.parse!
-      @config[:prompter].(cmd)
-      @config[:runner].(cmd)
-      cmd.ran = true
+      prompter.(cmd)
+      runner.(cmd)
     end
 
     def run_all
       @commands.each do |cmd|
         unless cmd.ran?
-          run(cmd)
+          execute(cmd)
         end
       end
     end

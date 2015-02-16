@@ -9,7 +9,7 @@ module Dramaturg
     include Command::Opt
 
     opt :program_name, ->(cmd){cmd.to_s[/^\S+/]}
-    
+
     opt :allow_suffix, ->(cmd){!!(cmd.to_s =~ /\s+$/)}
     opt :capture_output, false
     opt :fail_ok, false
@@ -24,7 +24,7 @@ module Dramaturg
     end
 
     def run
-      @script.run(self)
+      @script.execute(self)
     end
 
     def default(v)

@@ -6,7 +6,7 @@ module Dramaturg
       #as part of the interface allowing eager evaluation.
       #for internal/pre- or mid-run use, use #get
       def [](k)
-        run if !ran?
+        self.run if !ran?
         get(k)
       end
 
