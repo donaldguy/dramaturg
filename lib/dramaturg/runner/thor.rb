@@ -10,9 +10,9 @@ module Dramaturg
     def _call(line,cmd)
       if cmd.capture_output
         cmd[:output] = @thor_actions.run(line, verbose: false, capture: true)
-        ok = !cmd[:output].empty?
+        cmd.ok = !cmd[:output].empty?
       else
-        ok = @thor_actions.run(line, verbose:false)
+        cmd.ok = @thor_actions.run(line, verbose:false)
       end
     end
   end
