@@ -7,10 +7,9 @@ module Dramaturg
     end
 
     def _call(line,cmd)
-      print "Would run: #{line}"
+      puts "Would run: #{line}"
 
-      puts ""
-      return true
+      cmd.ok = true
     end
   end
 end

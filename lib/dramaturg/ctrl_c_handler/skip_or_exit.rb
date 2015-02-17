@@ -2,7 +2,7 @@ module Dramaturg
   class CtrlCHandler
     class SkipOrExit
       def self.call(prompter, cmd)
-        puts "\n^C again to exit; Enter to skip '#{cmd.name}'"
+        puts "\n^C again to exit; Any other key to skip '#{cmd.name}'"
 
         require 'mad_clibs/util/iohelper'
         key = IOHelper.read_key(false)

@@ -17,7 +17,7 @@ module Dramaturg
         end
       end
 
-      @last_success = cmd.success? and !cmd.skipped?
+      @last_success = (cmd.success? && !cmd.skipped?)
     end
 
     def last_success?
