@@ -22,8 +22,9 @@ module Dramaturg
       # # modify state
       #end
 
+      # should match parser input
       def to_s
-        self.for_prompt
+        for_prompt
       end
     end
   end

@@ -6,11 +6,11 @@ module Dramaturg
     include Command::AsCollection
     include Command::Opt
 
-    opt :name, ->(cmd) { cmd[0].to_s.strip }
-    opt :program_name, ->(cmd){cmd[0].for_run[/^\S+/]}
+    opt :name,         ->(cmd) { cmd.to_s[/^[^\{]+/].strip }
+    opt :program_name, ->(cmd) { cmd.to_s[/^\S+/] }
 
     #prompt behavior
-    opt :allow_suffix, ->(cmd){!!(cmd[-1].for_prompt =~ /\s+$/)}
+    opt :allow_suffix, ->(cmd){!!(cmd.to_s =~ /\s+$/)}
 
     #run behavior
     opt :fail_ok, false

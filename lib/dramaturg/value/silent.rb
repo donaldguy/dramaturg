@@ -11,7 +11,7 @@ module Dramaturg
     end
 
     def inspect
-      "[silent: '#{@value}']"
+      "{{silent: '#{@value}'}}"
     end
   end
 end

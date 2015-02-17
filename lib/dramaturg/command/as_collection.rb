@@ -8,11 +8,11 @@ module Dramaturg
       end
 
       def [](i)
-        if i.class == Symbol
-          run unless ran?
-          @outputs[i].for_prompt
+        run unless ran?
+        if self.respond_to? i
+          self.send i
         else
-          @values[i]
+          @outputs[i].for_prompt
         end
       end
 
@@ -22,6 +22,10 @@ module Dramaturg
 
       def <<(v)
         @values << v
+      end
+
+      def output
+        @outputs[:output]
       end
     end
   end

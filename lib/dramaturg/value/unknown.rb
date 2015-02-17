@@ -19,9 +19,10 @@ module Dramaturg
         end
       end
 
-      def inspect
-        "[unknown]"
+      def to_s
+        "{{unknown}}"
       end
+      alias inspect to_s
     end
   end
 end

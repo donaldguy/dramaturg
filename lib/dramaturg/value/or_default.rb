@@ -12,8 +12,12 @@ module Dramaturg
         @value = i
       end
 
+      def to_s
+        "{#@value}"
+      end
+
       def inspect
-        "{#{@value}}"
+        "{#@value (default: #@dfault)}"
       end
     end
   end

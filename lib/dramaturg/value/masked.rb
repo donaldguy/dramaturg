@@ -13,8 +13,12 @@ module Dramaturg
       @display
     end
 
-    def inspect
+    def to_s
       "{#@display}"
+    end
+
+    def inspect
+      "{#@display = #@value}"
     end
   end
 end
