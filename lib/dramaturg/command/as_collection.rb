@@ -10,7 +10,7 @@ module Dramaturg
       def [](i)
         if i.class == Symbol
           run unless ran?
-          @outputs[i].for_run
+          @outputs[i].for_prompt
         else
           @values[i]
         end

@@ -8,10 +8,6 @@ module Dramaturg
         super(value)
       end
 
-      def for_prompt
-        @default
-      end
-
       def input(i)
         @value = i
       end

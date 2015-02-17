@@ -31,12 +31,15 @@ module Dramaturg
       self
     end
     attr_accessor :ran
-    def ran?; @ran ||= false; end
+    def ran?
+      @ran ||= false
+      @ran || @skipped
+    end
 
     def skip
       @ok = :skipped
       @skipped = true
-      @outputs.each {|k,_| @outputs[k] = Value::Unknown }
+      @outputs.each {|k,_| @outputs[k] = Value::Unknown.new() }
     end
     def skipped?; @skipped ||= false; end
 
