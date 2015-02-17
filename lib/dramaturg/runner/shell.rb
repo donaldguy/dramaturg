@@ -8,8 +8,9 @@ module Dramaturg
 
     def _call(line,cmd)
       if cmd.capture_output
-        cmd[:output] = `#{line}`
-        cmd.ok = !cmd[:output].empty?
+        output = `#{line}`
+        cmd[:output] = output
+        cmd.ok = !output.empty?
       else
         cmd.ok = system(line)
       end
