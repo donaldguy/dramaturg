@@ -1,0 +1,23 @@
+## Change Log
+
+### v0.1.0 (2015/02/17 20:01 +00:00)
+- [8879ad3](https://github.com/donaldguy/dramaturg/commit/8879ad33ce818fa60f9eb67b05e53d314ea60566) FIX: restore skip as fail semantics (@donaldguy)
+- [87a1a2a](https://github.com/donaldguy/dramaturg/commit/87a1a2aa5089997e3d3a1e46c2933ccdee120653) REFACTOR: cmd[] only for symbols; consistent to_s (@donaldguy)
+- [b446c66](https://github.com/donaldguy/dramaturg/commit/b446c66c98ba082860e2e921a32c286a69363ece) Workaround for eager-eval output access (@donaldguy)
+- [2fcb94d](https://github.com/donaldguy/dramaturg/commit/2fcb94d1c7c8651e9da9eca54e98f26414c91961) Fixes for Thor (@donaldguy)
+- [36ce457](https://github.com/donaldguy/dramaturg/commit/36ce457155ea878ec27591ebdffef1c4f4382993) Fixed for Skips and Unknown (@donaldguy)
+- [cbe49f4](https://github.com/donaldguy/dramaturg/commit/cbe49f4ed21915d2d5cf038d252f87200c7397e6) Substantial Refactor of ~All internals (@donaldguy)
+- [2f086e3](https://github.com/donaldguy/dramaturg/commit/2f086e34ee13f668062dec5a68c72072dfbc3dcc) Allow for masked values ("virtual environment variables") (@donaldguy)
+- [2bb80d8](https://github.com/donaldguy/dramaturg/commit/2bb80d85246b37aa15d159932205590e0df3c9da) Allow stealth `tee` to a file as cmd#save_to_file (@donaldguy)
+- [b4b1713](https://github.com/donaldguy/dramaturg/commit/b4b1713c5b36f33c8aac73066dd3ab517a5f8f34) Add thor-compatible runner and import-path (@donaldguy)
+- [0f7e019](https://github.com/donaldguy/dramaturg/commit/0f7e019934165bf532108703daf56a1e5065c2e2) Allow non-space-delimited overridable fields (@donaldguy)
+- [a584174](https://github.com/donaldguy/dramaturg/commit/a584174b8ce9d2ebd25eda07fac219bd815b58ef) Move default config to class-level constant (@donaldguy)
+- [ae24769](https://github.com/donaldguy/dramaturg/commit/ae247696e8366b3bf775a93e57c151d0312630cc) Return self after run for code like (@donaldguy)
+- [a2ee66e](https://github.com/donaldguy/dramaturg/commit/a2ee66e6a74cf8f4f72fe132050c74e40a066a4e) README badges (@donaldguy)
+
+### v0.0.1 (2015/02/16 05:23 +00:00)
+- [da395cb](https://github.com/donaldguy/dramaturg/commit/da395cb5ce793f25ec871b42b8f95a5c7c1f312c) deliver on "optionally" with UseDefault Prompter (@donaldguy)
+- [2b0e752](https://github.com/donaldguy/dramaturg/commit/2b0e752a2b29c60f946a264a0a6e5ac9ddd67a6a) Add some pluggable int handlers; fancy prompt (@donaldguy)
+- [b6903cd](https://github.com/donaldguy/dramaturg/commit/b6903cd3a4fb1e7b5fbdb53ae2818d944f1b765c) Provisional Custom Interrupt Handling (@donaldguy)
+- [33dcec2](https://github.com/donaldguy/dramaturg/commit/33dcec2c0fc3768088eadd2227fac1183f6eec7e) Refactor config interface (@donaldguy)
+- [b3491e0](https://github.com/donaldguy/dramaturg/commit/b3491e01ee89fd0d7e85d0c9e9b4669ad444a5b7) Working proof of concept (@donaldguy)
