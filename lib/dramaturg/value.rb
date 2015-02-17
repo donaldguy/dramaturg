@@ -3,8 +3,9 @@ module Dramaturg
     extend ActiveSupport::Autoload
 
     autoload :Fixed
-    autoload :Default
+    autoload :OrDefault
     autoload :Silent
     autoload :Masked
+    autoload :Unknown
   end
 end

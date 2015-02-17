@@ -7,31 +7,24 @@ module Dramaturg
         super
       end
 
-      def _call(cmd)
-        print(prompt, " ", values_to_strings(cmd).join(" "), "\n")
-
-        return if @abort
-
-        @values.each do |key,value|
-          cmd[key] = cmd.get(cmd.default(key))
-        end
+      private
+      def tr_method_map
+        proc {|s| Kernel.method :String }
       end
 
-    private
-      def values_to_strings(cmd)
-        @values = {}
+      def format_for_display(map)
+        prompt_for_display +
+          map.map do |k,v|
+            @formatters[k.class].(v)
+          end.join('')
+      end
 
-        unfmt = cmd.map do |value|
-          if value.is_a? Symbol
-            @values[value] = cmd.get(value)
-          else
-            value
-          end
-        end
+      def doIO(display,map)
+        puts display
+      end
 
-        unfmt.map do |v|
-          @formatters[v.class].(v)
-        end
+      def process_results(*args)
+        #no input
       end
     end
   end

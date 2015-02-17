@@ -6,22 +6,18 @@ module Dramaturg
     end
 
     def call(cmd)
-      if !cmd.aborted
-        line = cmd.map { |v| cmd.get(v) }.join('')
-
-        ok = _call(line, cmd)
+      unless cmd.skipped?
+        line = cmd.map { |v| v.for_run }.join('')
 
         cmd.ran = line
+        cmd.ok = _call(line, cmd)
 
-        if !ok && !cmd.fail_ok
+        if !cmd.ok? && !cmd.fail_ok
           handle_fail(cmd)
         end
-      else
-        cmd.ran = :aborted
-        ok = false
       end
 
-      @last_success = ok
+      cmd.success?
     end
 
     def last_success?

@@ -1,20 +1,20 @@
+require_relative 'base'
+
 module Dramaturg
-  class Value::Masked
-    def initialize(val)
-      @val = val
+  class Value::Masked < Value::Base
+    attr_writer :display
+
+    def initialize(value)
+      @display = '$SECRET'
+      super(value)
     end
 
-    def to_str
-      @val
+    def for_prompt
+      @display
     end
 
-    def name(s=nil)
-      @name ||= s
-      if s == nil
-        @name
-      else
-        self
-      end
+    def inspect
+      "{#@display}"
     end
   end
 end

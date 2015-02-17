@@ -1,15 +1,17 @@
+require_relative 'base'
+
 module Dramaturg
-  class Value::Silent
-    def initialize(val)
-      @val = val
+  class Value::Silent < Value::Base
+    def initialize(value)
+      super(value)
     end
 
-    def default
-      @val
+    def for_prompt
+      ""
     end
 
-    def to_str
-      @val
+    def inspect
+      "[silent: '#{@value}']"
     end
   end
 end

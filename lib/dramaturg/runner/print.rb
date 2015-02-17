@@ -8,7 +8,6 @@ module Dramaturg
 
     def _call(line,cmd)
       print "Would run: #{line}"
-      cmd.ran = line
 
       puts ""
       return true
