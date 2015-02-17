@@ -1,42 +1,51 @@
-require_relative 'command/hash_like'
-require_relative 'command/parser'
+require_relative 'command/as_collection'
 require_relative 'command/opt'
 
 module Dramaturg
   class Command
-    include Command::HashLike
-    include Command::Parser
+    include Command::AsCollection
     include Command::Opt
 
-    opt :name, ->(cmd) { cmd.program_name }
-    opt :program_name, ->(cmd){cmd.to_s[/^\S+/]}
-    opt :aborted, false
+    opt :name, ->(cmd) { cmd[0].to_s.strip }
+    opt :program_name, ->(cmd){cmd[0].run_as[/^\S+/]}
 
-    opt :allow_suffix, ->(cmd){!!(cmd.to_s =~ /\s+$/)}
-    opt :capture_output, false
+    #prompt behavior
+    opt :allow_suffix, ->(cmd){!!(cmd[-1].prompt_as =~ /\s+$/)}
+
+    #run behavior
     opt :fail_ok, false
+
+    #output direction
+    opt :capture_output, false
     opt :save_to_file, false
 
-    attr_accessor :ran
-    alias ran? ran
-
     def initialize(cmd_str, script)
-      @cmd_str = cmd_str
+      @input_string = cmd_str
       @script = script
-      @ran = false
+      @values = []
+      @outputs = {}
     end
 
     def run
       @script.execute(self)
       self
     end
+    attr_accessor :ran
+    alias ran? ran
 
-    def default(v)
-      self.get(v).default
+    def skip
+      @ran = :skipped
+      @skipped = true
+      @outputs.each {|k,_| @outputs[k] = Value::Unknown }
     end
+    def skipped?; @skipped ||= false; end
 
     def to_s
-      @cmd_str
+      if @values.empty?
+        @input_string
+      else
+        self.map {|t| t.to_s}.join ''
+      end
     end
   end
 end

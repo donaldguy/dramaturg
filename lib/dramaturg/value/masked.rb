@@ -1,20 +1,18 @@
+require_relative 'base'
+
 module Dramaturg
   class Value::Masked
-    def initialize(val)
-      @val = val
+    def initialize(display, value)
+      @display = display
+      super(value)
     end
 
-    def to_str
-      @val
+    def prompt_as
+      @display
     end
 
-    def name(s=nil)
-      @name ||= s
-      if s == nil
-        @name
-      else
-        self
-      end
+    def inspect
+      "{#@display}"
     end
   end
 end

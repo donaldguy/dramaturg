@@ -1,35 +1,7 @@
-require 'term/ansicolor'
-
-COLORS = Term::ANSIColor
-
 module Dramaturg
   class Script
-
-    DEFAULT_CONFIG = {
-      prompter: {
-        class: Prompter::MadCLIbs,
-        prompt: ->(p) {
-          if p.script.runner.last_success?
-            COLORS.bold(COLORS.green("$ "))
-          else
-            COLORS.bold(COLORS.red("$ "))
-          end
-        },
-        format: {
-          Value::Default => ->(s) { COLORS.bold(COLORS.cyan(s)) },
-          Value::Fixed   => ->(s) { s },
-          Value::Silent  => ->(s) { "" },
-          Value::Masked  => ->(s) { s.name }
-        },
-        ctrlc: CtrlCHandler::SkipOrExit
-      },
-      runner: {
-        class: Runner::Shell
-      }
-    }
-
     def initialize(config = {})
-      @config = DEFAULT_CONFIG.deep_merge(config)
+      @config = Dramaturg::DEFAULT_CONFIG.deep_merge(config)
 
       @commands = []
     end
@@ -53,7 +25,8 @@ module Dramaturg
     end
 
     def execute(cmd)
-      cmd.parse!
+      #require 'pry'; binding.pry
+      parser.(cmd)
       prompter.(cmd)
       runner.(cmd)
     end
@@ -64,6 +37,10 @@ module Dramaturg
           execute(cmd)
         end
       end
+    end
+
+    def parser
+      @config[:parser][:class]
     end
 
     def prompter

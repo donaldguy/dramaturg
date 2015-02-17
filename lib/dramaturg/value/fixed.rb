@@ -1,4 +1,11 @@
+require_relative 'base'
+
 module Dramaturg
-  class Value::Fixed < String
+  module Value
+    class Fixed < Base
+      def inspect
+        @value
+      end
+    end
   end
 end

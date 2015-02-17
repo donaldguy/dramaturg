@@ -4,54 +4,41 @@ require 'madCLIbs'
 module Dramaturg
   module Prompter
     class MadCLIbs < Base
+      attr_reader :current_command
+
       def initialize(script,config)
         super
         @cli = ::MadCLIbs.new(separator: '')
         @cli.interrupt_handler = ->() { config[:ctrlc].(self, self.current_command) }
       end
 
-      def _call(cmd)
-        @current_command = cmd
-        @cli.prompt(prompt, *values_to_madclib_tokens(cmd))
-
-        return if @abort
-
-        @values.each do |key, entered|
-          cmd[key] = entered.value
-        end
-      end
-
-    private
-      def value_type_to_token_type(t)
-        @type_map ||=
-        {
-          Value::Default => ::MadCLIbs::Blanks::String,
-          Value::Silent => Value::Silent,
-          Value::Masked => Value::Masked,
-          Value::Fixed => Value::Fixed #i.e. ::String
-        }
-        @type_map[t]
-      end
-
-      def token_type_to_value_type(t)
-        value_type_to_token_type(t)
-        @reverse_type_map ||= Hash[@type_map.to_a.map(&:reverse)]
-        @reverse_type_map[t]
-      end
-
-      def values_to_madclib_tokens(cmd)
-        @values = {}
-
-        unfmt = cmd.map do |value|
-          if value.is_a? Symbol
-            @values[value] = @cli.string(cmd.default(value))
+      private
+      def tr_method_map
+        proc do |v|
+          if v.kind_of? Value::OrDefault
+            @cli.method :string
           else
-            value
+            String.method :new
           end
         end
+      end
 
-        unfmt.map do |v|
-          @formatters[token_type_to_value_type(v.class)].(v)
+      def format_for_display(map)
+        ([prompt_for_display] +
+          map.map do |k,v|
+            @formatters[k.class].(v)
+          end
+        )
+      end
+
+      def doIO(display, map)
+        @cli.prompt(*display)
+        true
+      end
+
+      def process_results(results, map)
+        map.each do |dmt_v, mcli_t|
+          dmt_v.input(mcli_t.to_s) if dmt_v.respond_to? :input
         end
       end
     end

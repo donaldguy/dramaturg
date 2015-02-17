@@ -6,8 +6,8 @@ module Dramaturg
     end
 
     def call(cmd)
-      if !cmd.aborted
-        line = cmd.map { |v| cmd.get(v) }.join('')
+      if !cmd.skipped?
+        line = cmd.map { |v| v.run_as }.join('')
 
         ok = _call(line, cmd)
 
@@ -17,7 +17,7 @@ module Dramaturg
           handle_fail(cmd)
         end
       else
-        cmd.ran = :aborted
+        cmd.ran = :skipped
         ok = false
       end
 

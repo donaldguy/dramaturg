@@ -8,7 +8,6 @@ $i = Dramaturg::Script.new({
     class: Dramaturg::Runner::Print
   },
 })
-at_exit { $i.run_all() }
 
 git = $i.cmd("git checkout -b {branch:master}")
   .name('new branch')
@@ -17,3 +16,5 @@ git = $i.cmd("git checkout -b {branch:master}")
 $i["git push -u origin {#{git[:branch]}}"]
 
 $i["echo 'all up to date'"]
+
+$i.run_all
